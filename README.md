@@ -9,7 +9,7 @@
 
 ## 1. Descripción del proyecto
 
-Este repositorio contiene un **sistema de recomendación de películas** escrito en Python, cuyo código inicial se generó con **GitHub Copilot** dentro de Visual Studio Code.
+Este repositorio contiene un **sistema de recomendación de películas** escrito en Python. El código se desarrolló con asistencia de IA y se analizó con **GitHub Copilot Chat** dentro de Visual Studio Code.
 
 El sistema aplica **filtrado colaborativo**, una de las técnicas de IA más usadas en plataformas como Netflix, Spotify o Amazon:
 
@@ -47,8 +47,6 @@ El número junto a cada película es la **nota que el sistema predice** (de 1 a 
 
 ## 4. Proceso seguido (paso a paso)
 
-> Reemplaza cada `capturas/pasoX.png` por tu propia captura. Guarda las imágenes en una carpeta `capturas/` dentro del repositorio.
-
 ### Paso 1 — Crear la cuenta en GitHub y activar Copilot
 Entré en <https://github.com/>, creé mi cuenta y validé el correo electrónico. En la sección de precios de GitHub Copilot elegí el plan **gratuito** (o el beneficio para estudiantes de GitHub Education).
 
@@ -60,32 +58,35 @@ Pulsé **New** y creé el repositorio `AI_Project` con visibilidad **pública**.
 ![Creación del repositorio](capturas/paso2.png)
 
 ### Paso 3 — Clonar el repositorio en Visual Studio Code
-Abrí la terminal integrada de VS Code (`Ctrl + ñ`) y ejecuté:
+Cloné el repositorio en la carpeta Documentos y lo abrí en Visual Studio Code:
 
 ```bash
-git clone https://github.com/<tu-usuario>/AI_Project.git
+git clone https://github.com/vittoxd/AI_Project.git
 cd AI_Project
+code .
 ```
 
-![Clonado del repositorio](capturas/paso3.png)
+![Repositorio abierto en VS Code](capturas/paso3.png)
 
-### Paso 4 — Crear el archivo y generar el código con Copilot
-Creé el archivo `recommendation_system.py` y escribí comentarios que describían lo que necesitaba. Copilot sugirió el código, y yo lo acepté con `Tab` y lo fui revisando. Algunos de los comentarios que usé:
+### Paso 4 — Usar GitHub Copilot con el código
+Con el repositorio abierto, inicié sesión en VS Code con mi cuenta de GitHub y marqué la carpeta como de confianza. En modo restringido Copilot no funciona.
 
-```python
-# Función que calcula la similitud del coseno entre dos diccionarios de valoraciones
-# Clase RecommendationSystem que recomiende películas usando filtrado colaborativo
-# Método que devuelva los usuarios más parecidos a un usuario dado
+Luego abrí **Copilot Chat** (panel derecho), adjunté `recommendation_system.py` como contexto y le escribí esta petición:
+
+```
+Función que calcula la similitud del coseno entre dos diccionarios de valoraciones
+def
 ```
 
-También usé **Copilot Chat** (panel derecho de VS Code) con el archivo `recommendation_system.py` como contexto. Le escribí el comentario de la función de similitud del coseno, y Copilot revisó el archivo, detectó que la función ya existía como `cosine_similarity(a, b)` y explicó cómo funciona: calcula el coseno usando las claves compartidas y devuelve `0.0` si no hay valores en común o si uno de los vectores tiene norma cero.
+Copilot revisó el archivo y, en lugar de generar una función duplicada, detectó que ya existía como `cosine_similarity(a, b)` y explicó qué hace.
 
 ![Copilot Chat analizando el código](capturas/paso4.png)
 
 **Observaciones sobre Copilot:**
-- **Lo que funcionó bien:** a partir de comentarios en español, Copilot generó rápido la estructura completa: la clase `RecommendationSystem`, la función de similitud del coseno y los métodos de recomendación. También autocompletó bien el código repetitivo, como los diccionarios de datos de ejemplo, los bucles y los `print` de la función `main()`.
-- **Lo que tuve que corregir:** la primera versión de `cosine_similarity` calculaba las normas usando solo las películas en común. Por eso dos usuarios con apenas 2 películas compartidas salían con una similitud de 0,71, que es demasiado alta. Lo corregí para que use el vector completo de cada usuario. Además, el método basado en ítems devolvía puntuaciones centradas (valores negativos) que no se entendían bien, así que lo ajusté para que devuelva una nota predicha entre 1 y 5.
-- **Lo que aprendí al probarlo:** la calidad de las recomendaciones depende mucho de los datos. Un usuario con una valoración incoherente (Felipe tenía *Matrix* por debajo de su propia media) quedaba agrupado con usuarios de gustos opuestos. Revisar la salida del programa fue imprescindible para detectar estos problemas.
+- **Entiende el contexto del proyecto:** no se limitó a responder la petición al pie de la letra. Leyó el archivo adjunto, reconoció que la función ya estaba implementada y respondió en español aunque su interfaz está en inglés.
+- **Su explicación no fue del todo exacta:** dijo que la función "calcula el coseno usando las claves compartidas". Al comparar con el código vi que el producto punto sí usa solo las películas en común, pero las **normas se calculan con el vector completo** de cada usuario. Ese detalle es importante: hace que dos usuarios con muy pocas películas en común tengan una similitud baja. Copilot lo simplificó y, sin revisar el código, habría aceptado una descripción incompleta.
+- **Requiere configuración previa:** para que funcionara tuve que iniciar sesión en VS Code y quitar el modo restringido de la carpeta. Antes de eso, el panel de Copilot no respondía.
+- **Probar el programa también fue clave:** al ejecutarlo comprobé que las recomendaciones dependen mucho de los datos. Por ejemplo, a quienes les gusta la ciencia ficción el sistema les recomienda *Blade Runner* o *Interstellar* con notas superiores a 4.
 
 ### Paso 5 — Probar el programa
 Ejecuté `python recommendation_system.py` y comprobé que las recomendaciones eran coherentes con los gustos de cada usuario.
@@ -95,8 +96,9 @@ Ejecuté `python recommendation_system.py` y comprobé que las recomendaciones e
 ### Paso 6 — Commit y push
 ```bash
 git add .
-git commit -m "Agrega sistema de recomendación generado con GitHub Copilot"
+git commit -m "Agrega capturas de pantalla"
 git push origin main
+git log --oneline
 ```
 
 ![Commit y push](capturas/paso6.png)
@@ -111,7 +113,7 @@ git push origin main
 
 ## 6. Conclusiones
 
-GitHub Copilot acelera mucho la escritura de código, sobre todo la estructura inicial y las partes repetitivas: basta con describir en un comentario lo que se necesita para obtener una propuesta funcional en segundos. Sin embargo, la actividad dejó claro que el código generado **no siempre es correcto**. El error en el cálculo de la similitud no producía ningún fallo visible, solo recomendaciones poco lógicas, y únicamente lo detecté al revisar los resultados con criterio. Por eso Copilot funciona mejor como un asistente de programación que como un reemplazo: el desarrollador sigue siendo responsable de entender, probar y validar cada sugerencia. Volvería a usarlo para crear prototipos, escribir código repetitivo y aprender nuevas librerías, pero siempre con revisión y pruebas.
+GitHub Copilot es útil para entender código rápido: leyó el archivo del proyecto, reconoció qué funciones ya existían y las explicó en lenguaje natural en pocos segundos. Sin embargo, la actividad dejó claro que sus respuestas **no siempre son exactas**. Su descripción de la similitud del coseno omitía un detalle importante (las normas usan el vector completo), y solo lo noté al comparar la explicación con el código. Por eso Copilot funciona mejor como un asistente que como una fuente de verdad: el desarrollador sigue siendo responsable de leer, probar y validar lo que propone. Lo volvería a usar para explorar código desconocido, generar código repetitivo y resolver dudas rápidas, pero siempre comprobando sus respuestas.
 
 ## 7. Referencias
 
