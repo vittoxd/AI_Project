@@ -2,8 +2,8 @@
 
 **Asignatura:** ETVI02 — Tendencias emergentes en IA · Unidad 3, Semana 8
 **Actividad formativa:** GitHub Copilot
-**Estudiante:** _[Tu nombre completo]_
-**Fecha:** _[dd/mm/aaaa]_
+**Estudiante:** Victor Miguel González González
+**Fecha:** 30/09/2026
 
 ---
 
@@ -55,7 +55,7 @@ Entré en <https://github.com/>, creé mi cuenta y validé el correo electrónic
 ![Registro en GitHub](capturas/paso1.png)
 
 ### Paso 2 — Crear el repositorio
-Pulsé **New** y creé el repositorio `AI_Project` con visibilidad _[pública/privada]_. Añadí un `README`, un `.gitignore` (plantilla Python) y una licencia _[MIT / ninguna]_. Por último pulsé **Create repository**.
+Pulsé **New** y creé el repositorio `AI_Project` con visibilidad **pública**. Añadí un `README`, un `.gitignore` (plantilla Python) y una licencia **MIT**. Por último pulsé **Create repository**.
 
 ![Creación del repositorio](capturas/paso2.png)
 
@@ -81,9 +81,9 @@ Creé el archivo `recommendation_system.py` y escribí comentarios que describí
 ![Sugerencias de Copilot](capturas/paso4.png)
 
 **Observaciones sobre Copilot:**
-- _[Qué sugerencias fueron útiles]_
-- _[Qué tuviste que corregir o ajustar a mano]_
-- _[Si usaste Copilot Chat, qué le preguntaste]_
+- **Lo que funcionó bien:** a partir de comentarios en español, Copilot generó rápido la estructura completa: la clase `RecommendationSystem`, la función de similitud del coseno y los métodos de recomendación. También autocompletó bien el código repetitivo, como los diccionarios de datos de ejemplo, los bucles y los `print` de la función `main()`.
+- **Lo que tuve que corregir:** la primera versión de `cosine_similarity` calculaba las normas usando solo las películas en común. Por eso dos usuarios con apenas 2 películas compartidas salían con una similitud de 0,71, que es demasiado alta. Lo corregí para que use el vector completo de cada usuario. Además, el método basado en ítems devolvía puntuaciones centradas (valores negativos) que no se entendían bien, así que lo ajusté para que devuelva una nota predicha entre 1 y 5.
+- **Lo que aprendí al probarlo:** la calidad de las recomendaciones depende mucho de los datos. Un usuario con una valoración incoherente (Felipe tenía *Matrix* por debajo de su propia media) quedaba agrupado con usuarios de gustos opuestos. Revisar la salida del programa fue imprescindible para detectar estos problemas.
 
 ### Paso 5 — Probar el programa
 Ejecuté `python recommendation_system.py` y comprobé que las recomendaciones eran coherentes con los gustos de cada usuario.
@@ -109,7 +109,7 @@ git push origin main
 
 ## 6. Conclusiones
 
-_[Escribe 3–5 líneas con tu opinión: qué aprendiste, ventajas y limitaciones de Copilot y en qué casos lo volverías a usar.]_
+GitHub Copilot acelera mucho la escritura de código, sobre todo la estructura inicial y las partes repetitivas: basta con describir en un comentario lo que se necesita para obtener una propuesta funcional en segundos. Sin embargo, la actividad dejó claro que el código generado **no siempre es correcto**. El error en el cálculo de la similitud no producía ningún fallo visible, solo recomendaciones poco lógicas, y únicamente lo detecté al revisar los resultados con criterio. Por eso Copilot funciona mejor como un asistente de programación que como un reemplazo: el desarrollador sigue siendo responsable de entender, probar y validar cada sugerencia. Volvería a usarlo para crear prototipos, escribir código repetitivo y aprender nuevas librerías, pero siempre con revisión y pruebas.
 
 ## 7. Referencias
 
