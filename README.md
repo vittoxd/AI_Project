@@ -78,7 +78,9 @@ Creé el archivo `recommendation_system.py` y escribí comentarios que describí
 # Método que devuelva los usuarios más parecidos a un usuario dado
 ```
 
-![Sugerencias de Copilot](capturas/paso4.png)
+También usé **Copilot Chat** (panel derecho de VS Code) con el archivo `recommendation_system.py` como contexto. Le escribí el comentario de la función de similitud del coseno, y Copilot revisó el archivo, detectó que la función ya existía como `cosine_similarity(a, b)` y explicó cómo funciona: calcula el coseno usando las claves compartidas y devuelve `0.0` si no hay valores en común o si uno de los vectores tiene norma cero.
+
+![Copilot Chat analizando el código](capturas/paso4.png)
 
 **Observaciones sobre Copilot:**
 - **Lo que funcionó bien:** a partir de comentarios en español, Copilot generó rápido la estructura completa: la clase `RecommendationSystem`, la función de similitud del coseno y los métodos de recomendación. También autocompletó bien el código repetitivo, como los diccionarios de datos de ejemplo, los bucles y los `print` de la función `main()`.
